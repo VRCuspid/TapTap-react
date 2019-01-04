@@ -87,13 +87,14 @@ module.exports = function(proxy, allowedHost) {
         // This registers user provided middleware for proxy reasons
         require(paths.proxySetup)(app);
       }
-      app.get('/api/test',function(req,res){
-        res.json({code:2})
-      })
+
+      // This lets us fetch source contents from webpack for the error overlay
+      app.use(evalSourceMapMiddleware(server));
+      // This lets us open files from the runtime error overlay.
+      app.use(errorOverlayMiddleware());
       app.get('/api/login',function(req,res){
         let name=req.query.name;
         let pwd=req.query.pwd;
-        console.log(loginData.loginList)
         if(!loginData.loginList[name]){
          return res.json({code:0,msg:'用户名不存在'})
           
@@ -103,11 +104,6 @@ module.exports = function(proxy, allowedHost) {
           res.json({code:4,msg:'登录成功!'})
         }
       })
-      // This lets us fetch source contents from webpack for the error overlay
-      app.use(evalSourceMapMiddleware(server));
-      // This lets us open files from the runtime error overlay.
-      app.use(errorOverlayMiddleware());
-
       // This service worker file is effectively a 'no-op' that will reset any
       // previous service worker registered for the same host:port combination.
       // We do this in development to avoid hitting the production cache if

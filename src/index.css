@@ -1,4 +1,4 @@
-body,html,#root{
+body,html,#root,.test{
     height:100%;
     width:100%;
     overflow: hidden;
@@ -7,4 +7,15 @@ body,html,#root{
     margin: 0;
     padding: 0;
     list-style: none;
+}
+.activeClickTap{
+    color:#14B9C8;
+}
+.test{
+    display:flex;
+    flex-direction: column;
+}
+.body{
+    flex:1;
+    overflow: hidden;
 }

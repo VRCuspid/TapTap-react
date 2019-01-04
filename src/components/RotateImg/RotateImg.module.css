@@ -10,7 +10,6 @@
     }
     .ShowItem{
         height: 140px;
-        margin:15px 0;
         overflow: hidden;
         position: relative;
         border-radius: 10px;
