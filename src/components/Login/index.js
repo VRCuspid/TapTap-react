@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 import style from './Login.module.css'
-import Head from '../Head/Head'
+import Head from '../Head'
 
 class Login extends Component {
     constructor(){
