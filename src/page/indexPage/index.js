@@ -2,11 +2,12 @@ import React,{Component} from 'react'
 import Login from '../../components/Login'
 import TapHead from '@/components/tapHead/Head'
 import ClickTap from '@/components/clickTap/index.js'
-import Android from './router/android'
-import {BrowserRouter as Router,Route} from 'react-router-dom'
-import PropTypes from 'prop-type'
+import {BrowserRouter as Router} from 'react-router-dom'
+import PropTypes from 'prop-types'
+import RouterView from '@/router'
 
 class Index extends Component {
+    
     constructor(){
         super()
         this.state={
@@ -15,8 +16,8 @@ class Index extends Component {
         }
     }
     render(){
-        return (
-            <div className="test">
+        return (<Router>
+            <div className="test"> 
                 {
                     this.state.flag&&<Login location="/api/login" ans={this.ans}></Login>
                 }
@@ -25,17 +26,13 @@ class Index extends Component {
                     <ClickTap ans={this.clickTap} title={{left:'推荐',right:'咨询'}}></ClickTap>
                 </div>
                 <div className="body">
-                    <Router>
-                        <Route path="/" alias="/android" component={Android}></Route>
-                    </Router>
+                    <RouterView/>
                 </div>
-                
             </div>
+            </Router>
         )
     }
     clickTap=(msg)=>{
-        console.log(msg)
-        console.log(this.context)
         // if(msg==='left'){
         //     Router.history.push('/android')
         // }else if(msg==='right'){
@@ -49,7 +46,7 @@ class Index extends Component {
     }
 }
 const MyContext = React.createContext({
-    router: PropTypes.object
+    router: PropTypes.func
 });
 Index.contextType=MyContext
 export default Index

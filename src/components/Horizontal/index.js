@@ -28,7 +28,6 @@ class Horizontal extends Component {
     componentDidMount(){
         let ul=this.ul;
         ul.style.width=ul.children.length*100+'px'
-        console.log(ul.children.length)
         new BScroll('.'+style.scroll,{
             probeType:2,
             click:true,

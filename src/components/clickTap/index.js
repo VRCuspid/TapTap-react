@@ -1,30 +1,29 @@
 import React,{Component} from 'react' 
 import style from './clickTap.module.css'
-import {BrowserRouter as Router,Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 export default class TapHead extends Component {
     render(){
         const {left,right}=this.props.title;
         return (
             <div className={style.header}> 
-                <div className={style.left+' activeClickTap'} onClick={(e)=>{this.clickTap('left',e)}}>
-                    <Router>
-                        <Link to="/android">{left}</Link>
-                    </Router>
+                <div className={style.left} onClick={(e)=>{this.clickTap('left',e)}}>
+                        <Link to="/android" className="activeClickTap">{left}</Link>
                 </div>
                 <div className={style.right} onClick={(e)=>{this.clickTap('right',e)}}>
-                    <Router>
                         <Link to="/new">{right}</Link>
-                    </Router>
                 </div>
             </div>
         )
     }
     clickTap=(ind,e)=>{
         this.props.ans(ind) // 子-->父 回调函数
+        e.stopPropagation()
         const tar=e.target; //获取事件源
         document.querySelector('.activeClickTap')&&document.querySelector('.activeClickTap').classList.remove('activeClickTap')
-        tar.classList.add('activeClickTap')
-        
-        
+        if(tar.nodeName==='DIV'){
+            tar.children[0].classList.add('activeClickTap')
+        }else if(tar.nodeName==='A'){
+            tar.classList.add('activeClickTap')
+        }
     }
 }

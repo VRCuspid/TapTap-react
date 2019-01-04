@@ -8,8 +8,10 @@ body,html,#root,.test{
     padding: 0;
     list-style: none;
 }
-.activeClickTap{
-    color:#14B9C8;
+a.activeClickTap{
+    color:#14B9C8 ;
+    border-bottom:2px solid #14B9C8;
+    font-weight: bold;
 }
 .test{
     display:flex;
